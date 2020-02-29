@@ -1,13 +1,51 @@
-// the setup function runs once when you press reset or power the board
+// color swirl! connect an RGB LED to the PWM pins as indicated
+// in the #defines
+// public domain, enjoy!
+ 
+#define REDPIN 5
+#define GREENPIN 6
+#define BLUEPIN 3
+ 
+#define FADESPEED 5     // make this higher to slow down
+ 
 void setup() {
-  // initialize digital pin 13 as an output.
-  pinMode(13, OUTPUT);
+  pinMode(REDPIN, OUTPUT);
+  pinMode(GREENPIN, OUTPUT);
+  pinMode(BLUEPIN, OUTPUT);
 }
  
-// the loop function runs over and over again forever
+ 
 void loop() {
-  digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);              // wait for a second
-  digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);              // wait for a second
+  int r, g, b;
+ 
+  // fade from blue to violet
+  for (r = 0; r < 256; r++) { 
+    analogWrite(REDPIN, r);
+    delay(FADESPEED);
+  } 
+  // fade from violet to red
+  for (b = 255; b > 0; b--) { 
+    analogWrite(BLUEPIN, b);
+    delay(FADESPEED);
+  } 
+  // fade from red to yellow
+  for (g = 0; g < 256; g++) { 
+    analogWrite(GREENPIN, g);
+    delay(FADESPEED);
+  } 
+  // fade from yellow to green
+  for (r = 255; r > 0; r--) { 
+    analogWrite(REDPIN, r);
+    delay(FADESPEED);
+  } 
+  // fade from green to teal
+  for (b = 0; b < 256; b++) { 
+    analogWrite(BLUEPIN, b);
+    delay(FADESPEED);
+  } 
+  // fade from teal to blue
+  for (g = 255; g > 0; g--) { 
+    analogWrite(GREENPIN, g);
+    delay(FADESPEED);
+  } 
 }
